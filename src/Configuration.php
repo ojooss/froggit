@@ -52,8 +52,7 @@ class Configuration
         if (false === $this->databaseUser) {
             throw new Exception('env:MYSQL_USER not set');
         }
-        $this->databasePassword = '"'.getenv('MYSQL_PASSWORD').'"';
-
+        $this->databasePassword = getenv('MYSQL_PASSWORD');
         if (false === $this->databasePassword) {
             throw new Exception('env:MYSQL_PASSWORD not set');
         }

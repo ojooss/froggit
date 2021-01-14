@@ -49,6 +49,9 @@ try {
         $configuration->getDatabaseName(),
         $configuration->getDatabasePort()
     );
+    if (!$dbh) {
+        throw new RuntimeException( mysqli_connect_error() );
+    }
 
     $data = $converter->dispatchRequest($_POST);
 
@@ -62,7 +65,7 @@ try {
             "   value = " . $value;
         #echo $sql . PHP_EOL;
         if (false === mysqli_query($dbh, $sql)) {
-            throw new \RuntimeException(mysqli_error($dbh) . PHP_EOL . $sql);
+            throw new RuntimeException(mysqli_error($dbh) . PHP_EOL . $sql);
         }
     }
 
