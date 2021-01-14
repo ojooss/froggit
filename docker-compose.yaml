@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+
+  webserver:
+    container_name: froggit_webserver
+    image: froggit:local
+    build:
+      context: .
+    volumes:
+      - './:/var/www/html'
+    environment:
+      - "MYSQL_HOST=${HOMEE_DB_HOST}"
+      - "MYSQL_PORT=${HOMEE_DB_PORT}"
+      - "MYSQL_USER=${HOMEE_DB_USER}"
+      - "MYSQL_PASSWORD=${HOMEE_DB_PASSWORD}"
+      - "MYSQL_DATABASE=${HOMEE_DB_DATABASE}"
+      - "MYSQL_TABLE=${HOMEE_DB_LOG_TABLE}"
