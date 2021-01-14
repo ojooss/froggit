@@ -37,3 +37,5 @@ Sample POST-Parameter according to `ecowitt` Format
         [freq] => 868M
         [model] => HP1000SE-PRO_Pro_V1.6.4
     )
+
+Siehe auch https://heiligensee-wetter.de/code_1.php
