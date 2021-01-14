@@ -3,7 +3,7 @@
 include_once __DIR__ . '/src/Configuration.php';
 include_once __DIR__ . '/src/FroggitConverter.php';
 
-
+/*
 $_POST = array(
     'PASSKEY' => 'ACA4D56B4A00A25083AF04701AC8FACF',
     'stationtype' => 'EasyWeatherV1.4.6',
@@ -36,7 +36,7 @@ $_POST = array(
     'freq' => '868M',
     'model' => 'HP1000SE-PRO_Pro_V1.6.4',
 );
-
+*/
 
 try {
     $configuration = new Configuration();
