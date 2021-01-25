@@ -6,25 +6,20 @@ class FroggitConverter
 
     /**
      * List of allowed parameter names
+     * @var array (attribute => name)
+     */
+    private array $whitelist = [];
+
+    /**
+     * Array of skipped value (not in whitelist)
      * @var array
      */
-    private array $whitelist = [
-        'baromrelin' => 'barometer',
-        'dailyrainin' => 'rain-daily',
-        'eventrainin' => 'rain-event',
-        'hourlyrainin' => 'rain-hourly',
-        'humidity' => 'humidity-out',
-        'humidityin' => 'humidity-in',
-        'maxdailygust' => 'wind-gust-max-day',
-        'rainratein' => 'rain-rate',
-        'soilmoisture1' => 'soil-moisture-1',
-        'tempf' => 'temperature-out',
-        'tempinf' => 'temperature-in',
-        'uv' => 'uv',
-        'winddir_avg10m' => 'wind-direction-avg10m',
-        'windspdmph_avg10m' => 'wind-speed-avg10m',
-    ];
+    private array $skippedValues = [];
 
+    /**
+     * Convert or Recalculate values matching pattern
+     * @var array (pattern => functionName)
+     */
     private array $converterFunctions = [
         '^windsp.*' => 'convertWind',
         '.*gust.*' => 'convertWind',
@@ -44,6 +39,7 @@ class FroggitConverter
             try {
                 // check whitelist
                 if (!array_key_exists($parameter, $this->whitelist)) {
+                    $this->skippedValues[$parameter] = $value;
                     continue;
                 }
 
@@ -62,7 +58,7 @@ class FroggitConverter
                 $return[$parameter] = $value;
 
             } catch (Throwable $t) {
-                error_log($t->getMessage());
+                $this->skippedValues[$parameter] = 'ERROR: ' . $t->getMessage();
             }
         }
 
@@ -70,13 +66,20 @@ class FroggitConverter
     }
 
     /**
-     * @param string $parameter
-     * @param $value
+     * @param $attribute
+     * @param $name
      */
-    private function dispatchParameter(string $parameter, $value): void
+    public function addParameter($attribute, $name)
     {
+        $this->whitelist[$attribute] = $name;
+    }
 
-
+    /**
+     * @return array
+     */
+    public function getSkippedValues(): array
+    {
+        return $this->skippedValues;
     }
 
     /**

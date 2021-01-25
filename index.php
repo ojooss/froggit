@@ -39,9 +39,33 @@ $_POST = array(
 */
 
 try {
+    /*
+     * init objects
+     */
     $configuration = new Configuration();
     $converter = new FroggitConverter();
 
+    /*
+     * init parameters
+     */
+    $converter->addParameter('baromrelin', 'barometer');
+    $converter->addParameter('dailyrainin', 'rain-daily');
+    $converter->addParameter('eventrainin', 'rain-event');
+    $converter->addParameter('hourlyrainin', 'rain-hourly');
+    $converter->addParameter('humidity', 'humidity-out');
+    $converter->addParameter('humidityin', 'humidity-in');
+    $converter->addParameter('maxdailygust', 'wind-gust-max-day');
+    $converter->addParameter('rainratein', 'rain-rate');
+    $converter->addParameter('soilmoisture1', 'soil-moisture-1');
+    $converter->addParameter('tempf', 'temperature-out');
+    $converter->addParameter('tempinf', 'temperature-in');
+    $converter->addParameter('uv', 'uv');
+    $converter->addParameter('winddir_avg10m', 'wind-direction-avg10m');
+    $converter->addParameter('windspdmph_avg10m', 'wind-speed-avg10m');
+
+    /*
+     * try to connect DB
+     */
     $dbh = mysqli_connect(
         $configuration->getDatabaseHost(),
         $configuration->getDatabaseUser(),
@@ -53,10 +77,21 @@ try {
         throw new RuntimeException( mysqli_connect_error() );
     }
 
-    $data = $converter->dispatchRequest($_POST);
+    /*
+     * handle requests
+     */
+    if (!empty($_POST)) {
+        $data = $converter->dispatchRequest($_POST);
+    } elseif (!empty($_GET)) {
+        $data = $converter->dispatchRequest($_GET);
+    } else {
+        $data = [];
+    }
 
+    /*
+     *  save to database
+     */
     foreach ($data as $attribute => $value) {
-
         $sql = "INSERT INTO ".$configuration->getDatabaseTable().
             "   (timestamp, device, attribute, value) ".
             "VALUES ".
@@ -69,6 +104,9 @@ try {
         }
     }
 
+    /*
+     * close connection
+     */
     if ($dbh) {
         mysqli_close($dbh);
     }
