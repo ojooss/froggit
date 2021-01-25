@@ -111,9 +111,27 @@ try {
         mysqli_close($dbh);
     }
 
-    #file_put_contents('php://stdout', date("Y-m-d H:i:s").'|'.print_r($converter, true));
+    /*
+     * log for debug purpose
+     */
+    file_put_contents(__DIR__ . '/debug.log', print_r($data, true));
+    file_put_contents(__DIR__ . '/skipped.log', print_r($converter->getSkippedValues(), true));
+    file_put_contents(__DIR__ . '/error.log', '');
+
+    /*
+     * return 200 OK
+     */
     echo 'SUCCESS';
+
 } catch (Exception $e) {
-    file_put_contents('php://stdout', date("Y-m-d H:i:s").'| ERROR: ' . $e->getMessage() . PHP_EOL);
+
+    /*
+     * log error
+     */
+    file_put_contents(__DIR__ . '/error.log', print_r($e, true));
+
+    /*
+     * return failure
+     */
     echo 'FAILURE';
 }
