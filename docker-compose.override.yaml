@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+
+  webserver:
+    ports:
+      - "${HTTP_PORT}:80"
+
+  database:
+    container_name: froggit_database
+    image: linuxserver/mariadb
+    volumes:
+      - "database:/config"
+      - "./init.sql:/config/initdb.d/init.sql"
+    ports:
+      - "${HOMEE_DB_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${HOMEE_DB_PASSWORD}
+      MYSQL_DATABASE: ${HOMEE_DB_DATABASE}
+      MYSQL_USER: ${HOMEE_DB_USER}
+      MYSQL_PASSWORD: ${HOMEE_DB_PASSWORD}
+
+volumes:
+  database:
