@@ -5,6 +5,7 @@ services:
   webserver:
     container_name: froggit_webserver
     image: froggit:local
+    restart: always
     build:
       context: .
     volumes:
