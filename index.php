@@ -53,15 +53,23 @@ try {
     $converter->addParameter('eventrainin', 'rain-event');
     $converter->addParameter('hourlyrainin', 'rain-hourly');
     $converter->addParameter('humidity', 'humidity-out');
-    $converter->addParameter('humidityin', 'humidity-in');
     $converter->addParameter('maxdailygust', 'wind-gust-max-day');
     $converter->addParameter('rainratein', 'rain-rate');
     $converter->addParameter('soilmoisture1', 'soil-moisture-1');
     $converter->addParameter('tempf', 'temperature-out');
-    $converter->addParameter('tempinf', 'temperature-in');
     $converter->addParameter('uv', 'uv');
     $converter->addParameter('winddir_avg10m', 'wind-direction-avg10m');
     $converter->addParameter('windspdmph_avg10m', 'wind-speed-avg10m');
+
+    $converter->addParameter('tempinf', 'temperature-living');
+    $converter->addParameter('humidityin', 'humidity-living');
+    $converter->addParameter('temp1f', 'temperature-roof');
+    $converter->addParameter('humidity1', 'humidity-roof');
+    $converter->addParameter('temp2f', 'temperature-garage');
+    $converter->addParameter('humidity2', 'humidity-garage');
+    $converter->addParameter('temp3f', 'temperature-basement');
+    $converter->addParameter('humidity3', 'humidity-basement');
+
 
     /*
      * try to connect DB
