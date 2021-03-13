@@ -60,6 +60,7 @@ try {
     $converter->addParameter('uv', 'uv');
     $converter->addParameter('winddir_avg10m', 'wind-direction-avg10m');
     $converter->addParameter('windspdmph_avg10m', 'wind-speed-avg10m');
+    $converter->addParameter('windgustmph', 'wind-gust');
 
     $converter->addParameter('tempinf', 'temperature-living');
     $converter->addParameter('humidityin', 'humidity-living');
