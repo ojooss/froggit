@@ -1,0 +1,30 @@
+{
+  "webhook-name" : {
+    "on-parameter-name" : "trigger-on-this-parameter-name",
+    "url" : "https//...",
+    "lower-threshold" : 4,
+    "upper-threshold" : 99
+  },
+  "trigger-always" : {
+    "on-parameter-name" : "wind-gust",
+    "url" : "https://..."
+  },
+  "trigger-if-greater" : {
+    "on-parameter-name" : "temperature-roof",
+    "url" : "https//...",
+    "lower-threshold" : 36,
+    "log-level" : "debug"
+  },
+  "trigger-if-lower" : {
+    "on-parameter-name" : "temperature-roof",
+    "url" : "https//...",
+    "upper-threshold" : 10,
+    "log-level" : "info"
+  },
+  "trigger-in-range" : {
+    "on-parameter-name" : "humidity-roof",
+    "url" : "https//...",
+    "lower-threshold" : 60,
+    "upper-threshold" : 80
+  }
+}

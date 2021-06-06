@@ -83,7 +83,7 @@ class FroggitConverter
     }
 
     /**
-     * mph to ms
+     * CONVERT:  mph to ms
      *
      * @param string (float) $value
      * @return float
@@ -94,7 +94,7 @@ class FroggitConverter
     }
 
     /**
-     * f to c
+     * CONVERT:  f to c
      *
      * @param string (float) $value
      * @return float
@@ -105,7 +105,7 @@ class FroggitConverter
     }
 
     /**
-     * inHG in hPA
+     * CONVERT:  inHG in hPA
      *
      * @param string (float) $value
      * @return int
@@ -116,7 +116,7 @@ class FroggitConverter
     }
 
     /**
-     * in to mm
+     * CONVERT:  in to mm
      *
      * @param string (float) $value
      * @return int

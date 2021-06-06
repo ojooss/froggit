@@ -2,6 +2,7 @@
 
 include_once __DIR__ . '/src/Configuration.php';
 include_once __DIR__ . '/src/FroggitConverter.php';
+include_once __DIR__ . '/src/WebHook.php';
 
 /*
 $_POST = array(
@@ -126,6 +127,28 @@ try {
     file_put_contents(__DIR__ . '/debug.log', print_r($data, true));
     file_put_contents(__DIR__ . '/skipped.log', print_r($converter->getSkippedValues(), true));
     file_put_contents(__DIR__ . '/error.log', '');
+
+    /*
+     * WebHooks
+     */
+    if (file_exists(__DIR__.'/webhooks.json')) {
+        file_put_contents(__DIR__ . '/webhooks.log', ''); // reset log file
+        $webhooks = WebHook::factory(__DIR__ . '/webhooks.json');
+        foreach ($webhooks as $webhook) {
+            try {
+                $result = $webhook->trigger($data);
+                file_put_contents(
+                    __DIR__ . '/webhooks.log',
+                    implode(PHP_EOL, $result).PHP_EOL.PHP_EOL,
+                    FILE_APPEND
+                );
+            } catch (Exception $e) {
+                file_put_contents(__DIR__ . '/error.log', 'WebhookError: ' . $e->getMessage().PHP_EOL);
+            }
+        }
+    } else {
+        file_put_contents(__DIR__ . '/debug.log', 'No webhooks.json found', FILE_APPEND);
+    }
 
     /*
      * return 200 OK

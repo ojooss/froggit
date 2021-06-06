@@ -1,6 +1,14 @@
 #Froggit Data Collector
 
-Sample POST-Parameter according to `ecowitt` Format 
+Simple PHP-App to act as a collector for froggit data. 
+Configure your froggit weather station to call this app via http(s).
+
+Main file 'index.php' takes parameters (see below) and converts the 
+values and store them into a given mysql database.
+
+Finally, can trigger some webhooks. Beware of not to much, because you may run into timeouts.
+
+##Sample POST-Parameter according to `ecowitt` Format 
 
 @see https://www.ecowitt.net
     
@@ -38,4 +46,4 @@ Sample POST-Parameter according to `ecowitt` Format
         [model] => HP1000SE-PRO_Pro_V1.6.4
     )
 
-Siehe auch https://heiligensee-wetter.de/code_1.php
+See also https://heiligensee-wetter.de/code_1.php
