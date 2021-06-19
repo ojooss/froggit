@@ -57,6 +57,8 @@ try {
     $converter->addParameter('maxdailygust', 'wind-gust-max-day');
     $converter->addParameter('rainratein', 'rain-rate');
     $converter->addParameter('soilmoisture1', 'soil-moisture-1');
+    $converter->addParameter('soilmoisture2', 'soil-moisture-2');
+    $converter->addParameter('soilmoisture3', 'soil-moisture-3');
     $converter->addParameter('tempf', 'temperature-out');
     $converter->addParameter('uv', 'uv');
     $converter->addParameter('winddir_avg10m', 'wind-direction-avg10m');
